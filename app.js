@@ -1,23 +1,125 @@
-const supabaseUrl = "https://wyyxmzpqfhrjhkzgsmsh.supabase.co";
-const supabaseKey =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind5eXhtenBxZmhyamhremdzbXNoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE0Mzg0ODYsImV4cCI6MjA2NzAxNDQ4Nn0.M4SK79mPcsv_Y5RXxhZZksacI50sZ9Zw1NPeimNvitU";
+// debugger
+// const supabaseUrl = "https://wyyxmzpqfhrjhkzgsmsh.supabase.co";
+// const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind5eXhtenBxZmhyamhremdzbXNoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE0Mzg0ODYsImV4cCI6MjA2NzAxNDQ4Nn0.M4SK79mPcsv_Y5RXxhZZksacI50sZ9Zw1NPeimNvitU"
 
-  const {createClient} = supabase;
-  const client = createClient(supabaseUrl, supabaseKey)
-  console.log(createClient);
+// const { createClient } = supabase;
+// const client = createClient(supabaseUrl, supabaseKey);
+// console.log(createClient);
+// console.log(client);
 
-  let userName = document.querySelector("#name");
-  let userEmail = document.querySelector("#email");
-  let userPass = document.querySelector("#password");
-  let btn = document.querySelector("#btn");
+// let btn = document.getElementById("signup-btn");
 
-  btn.addEventListener("click", function(){
-    let getName = userName.value;
-    let getEmail = userEmail.value;
-    let getPass = userPass.value;
+// btn.addEventListener("click", function () {
+//   let userEmail = document.getElementById("email");
+//   let userPass = document.getElementById("password");
 
-    console.log(getName, getEmail, getPass);
-  })
+//   if (userEmail && userPass) {
+//     console.log(userEmail.value, userPass.value);
+
+//     async function signupUser() {
+//       try {
+//         const { data, error } = await client.auth.signUp({
+//           email: userEmail.value,
+//           password: userPass.value,
+//         });
+
+//         if (error) throw error
+//         console.log(data)
+//       }
+//       catch (error) {
+//         console.log(error);
+//         console.log(error.message);
+        
+
+//         switch (error.message) {
+//           case "Unable to validate email address: invalid format":
+//             console.log("hello")
+//             alert("please give us the right format of email address");
+//             break;
+//         }
+//       }
+
+//     }
+//     signupUser();
+//   }else {
+//     alert("Please fill the input")
+//   }
+
+// });
 
 
- 
+//--------------- My code------------------
+// // const supabaseUrl = "https://wyyxmzpqfhrjhkzgsmsh.supabase.co";
+// // const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind5eXhtenBxZmhyamhremdzbXNoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE0Mzg0ODYsImV4cCI6MjA2NzAxNDQ4Nn0.M4SK79mPcsv_Y5RXxhZZksacI50sZ9Zw1NPeimNvitU";
+
+// // const client = supabase.createClient(supabaseUrl, supabaseKey);
+
+// // document.querySelector("#btn").addEventListener("click", function () {
+// //   const email = document.getElementById("email").value.trim();
+// //   const password = document.getElementById("password").value.trim();
+
+// //   if (!email || !password) {
+// //     alert("Please fill both fields");
+// //     return;
+// //   }
+
+// //   async function signupUser() {
+// //     try {
+// //       const { data, error } = await client.auth.signUp({
+// //         email,
+// //         password,
+// //       });
+
+// //       if (error) throw error;
+
+// //       console.log("Signup success:", data);
+// //       alert("Signup successful!");
+
+// //     } catch (error) {
+// //       console.log("Signup error:", error.message);
+// //       if (error.message.includes("invalid format")) {
+// //         alert("Please enter a valid email address");
+// //       } else {
+// //         alert("Signup failed: " + error.message);
+// //       }
+// //     }
+// //   }
+
+// //   signupUser();
+// // });
+
+//------------------- deepdeek code-------------
+// 1. Setup Supabase
+    const supabaseUrl = "https://wyyxmzpqfhrjhkzgsmsh.supabase.co";
+    const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind5eXhtenBxZmhyamhremdzbXNoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE0Mzg0ODYsImV4cCI6MjA2NzAxNDQ4Nn0.M4SK79mPcsv_Y5RXxhZZksacI50sZ9Zw1NPeimNvitU";
+    const client = supabase.createClient(supabaseUrl, supabaseKey);
+
+    // 2. When signup button is clicked
+    document.getElementById("signup-btn").addEventListener("click", async () => {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      // 3. Simple validation
+      if (!email || !password) {
+        alert("Please fill in both fields");
+        return;
+      }
+
+      // 4. Try to sign up
+      try {
+        const { data, error } = await client.auth.signUp({
+          email: email,
+          password: password,
+        });
+
+        if (error) {
+          alert("Error: " + error.message);
+        } else {
+          alert("Signup successful! Check your email.");
+          console.log("User created:", data);
+        }
+      } catch (err) {
+        alert("Something went wrong: " + err.message);
+        console.error(err);
+      }
+    });
