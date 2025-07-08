@@ -88,38 +88,70 @@
 // //   signupUser();
 // // });
 
-//------------------- deepdeek code-------------
-// 1. Setup Supabase
-    const supabaseUrl = "https://wyyxmzpqfhrjhkzgsmsh.supabase.co";
-    const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind5eXhtenBxZmhyamhremdzbXNoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE0Mzg0ODYsImV4cCI6MjA2NzAxNDQ4Nn0.M4SK79mPcsv_Y5RXxhZZksacI50sZ9Zw1NPeimNvitU";
-    const client = supabase.createClient(supabaseUrl, supabaseKey);
+const supabaseUrl = "https://wyyxmzpqfhrjhkzgsmsh.supabase.co";
+const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind5eXhtenBxZmhyamhremdzbXNoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE0Mzg0ODYsImV4cCI6MjA2NzAxNDQ4Nn0.M4SK79mPcsv_Y5RXxhZZksacI50sZ9Zw1NPeimNvitU"
 
-    // 2. When signup button is clicked
-    document.getElementById("signup-btn").addEventListener("click", async () => {
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
+const { createClient } = supabase;
+const client = createClient(supabaseUrl, supabaseKey)
+console.log(createClient)
+console.log(client);
 
-      // 3. Simple validation
-      if (!email || !password) {
-        alert("Please fill in both fields");
-        return;
-      }
 
-      // 4. Try to sign up
-      try {
-        const { data, error } = await client.auth.signUp({
-          email: email,
-          password: password,
-        });
+// signup functionality
+const signupBtn = document.getElementById("signup-btn")
+signupBtn && signupBtn.addEventListener("click", function () {
+    const signupEmail = document.getElementById("signup-email")
+    const signupPass = document.getElementById("signup-password")
 
-        if (error) {
-          alert("Error: " + error.message);
-        } else {
-          alert("Signup successful! Check your email.");
-          console.log("User created:", data);
+
+    //    false        &&   false
+    //     true        &&   true
+
+    //    false  &&                  true
+
+
+    //    true                true 
+
+    if (signupEmail && signupPass) {
+        console.log(signupEmail, signupPass)
+
+        async function sigupUser() {
+            try {
+                const loader = document.getElementById("loader")
+                loader.style.display = "block"
+                const { data, error } = await client.auth.signUp({
+                    email: signupEmail.value,
+                    password: signupPass.value,
+                })
+                loader.style.display = "none"
+                console.log(data)
+                // navigate to login page
+
+                // window.location.href = "login.html"
+            }
+            catch (error) {
+                console.log(error.message)
+
+                switch (error.message) {
+                    case "Unable to validate email address: invalid format":
+                        console.log("hello")
+                        alert("please give us the right format of email address");
+                        break;
+                }
+
+            }
+
+
+
         }
-      } catch (err) {
-        alert("Something went wrong: " + err.message);
-        console.error(err);
-      }
-    });
+        sigupUser()
+
+
+    }
+
+    else {
+        alert("please fill fields")
+    }
+
+
+})
