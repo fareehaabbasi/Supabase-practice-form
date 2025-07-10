@@ -4,7 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="style.css">
     <title>log-in</title>
 </head>
@@ -14,10 +16,16 @@
         <form class="signup-form">
             <h2>Welcome back</h2>
             <h5>Please enter your details</h5>
-            <input type="email" placeholder="Email" required />
-            <input type="password" placeholder="Password" required />
-            <button type="submit">Log-In</button>
-            <button type="submit" class="btn"><span><i class="fa-brands fa-google"></i></span>  Log In with Google</button>
+            <input id="login-email" type="email" placeholder="Email" required />
+            <div class="pass">
+                <input id="login-password" type="password" placeholder="Password" required />
+                <button type="button" id="togglePassword" class="toggle-btn">
+                    <i class="fa-solid fa-eye" id="eyeIcon"></i>
+                </button>
+            </div>
+            <button id="login-btn" type="submit">Log-In</button>
+            <button type="submit" id="login-google" class="btn"><span><i class="fa-brands fa-google"></i></span> Log In
+                with Google</button>
             <p>Don't have an account <a href="index.html">Sign Up</a></p>
         </form>
     </div>

@@ -1,49 +1,85 @@
 body {
-      background-color: #0a0a0a;
-      color: #f1f1f1;
-      font-family: 'Segoe UI', sans-serif;
-    }
+  background-color: #0a0a0a;
+  color: #f1f1f1;
+  font-family: 'Segoe UI', sans-serif;
+}
 
-    .navbar-brand span {
-      color: #FFA500;
-    }
+.navbar-brand span {
+  color: #FFA500;
+}
 
-    .hero h1,
-    .hero h2,
-    .text-warning {
-      color: #FFA500 !important;
-    }
+.user-details {
+    display: flex;
+    flex-direction: column;
+}
 
-    .hero {
-      background-color: #0f0f0f;
-    }
+.user-details h3 {
+    margin: 0;
+    font-size: 1rem;
+    color: white;
+}
 
-    .btn-warning {
-      background-color: #FFA500;
-      border: none;
-      color: #000;
-      font-weight: bold;
-    }
+.user-details p {
+    margin: 0;
+    font-size: 0.8rem;
+    color: #ddd;
+}
 
-    .btn-warning:hover {
-      background-color: #ff8c00;
-      color: #fff;
-    }
+.hero h1,
+.hero h2,
+.text-warning {
+  color: #FFA500 !important;
+}
 
-    section {
-      scroll-margin-top: 100px;
-    }
+.hero {
+  background-color: #0f0f0f;
+}
 
-    input,
-    textarea {
-      background-color: #1c1c1c;
-      color: white;
-      border: 1px solid #444;
-    }
+.btn-warning {
+  background-color: #FFA500;
+  border: none;
+  color: #000;
+  font-weight: bold;
+}
 
-    input:focus,
-    textarea:focus {
-      border-color: #FFA500;
-      box-shadow: none;
-      background-color: #222;
-    }
+.btn-warning:hover {
+  background-color: #ff8c00;
+  color: #fff;
+}
+
+section {
+  scroll-margin-top: 100px;
+}
+
+input,
+textarea {
+  background-color: #1c1c1c;
+  color: white;
+  border: 1px solid #444;
+}
+
+input:focus,
+textarea:focus {
+  border-color: #FFA500;
+  box-shadow: none;
+  background-color: #222;
+}
+
+#profile-name {
+  min-width: 80px;
+  display: inline-block;
+}
+
+@keyframes shimmer {
+  0% {
+    opacity: 0.3;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0.3;
+  }
+}
