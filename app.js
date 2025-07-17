@@ -47,6 +47,7 @@ LoginWithGoogle && LoginWithGoogle.addEventListener('click', async () => {
 			provider: 'google',
 			options: {
 				redirectTo: window.location.origin + '/home.html',
+				redirectTo: 'https://fareehaabbasi.github.io/Supabase-practice-form/',
 				queryParams: { access_type: 'offline', prompt: 'consent' },
 			},
 		})
