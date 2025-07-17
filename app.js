@@ -39,6 +39,24 @@ async function userProfile() {
 	}
 }
 
+// -------- Log In with google ---------
+const LoginWithGoogle = document.getElementById("login-google");
+LoginWithGoogle && LoginWithGoogle.addEventListener('click', async () => {
+	try {
+		const { error } = await client.auth.signInWithOAuth({
+			provider: 'google',
+			options: {
+				redirectTo: window.location.origin + '/home.html',
+				queryParams: { access_type: 'offline', prompt: 'consent' },
+			},
+		})
+		if (error) throw error;
+	} catch (error) {
+		console.error('Google login error:', error);
+		alert(error.message || 'Google login failed');
+	}
+});
+
 // Check for returning Google OAuth redirect
 document.addEventListener('DOMContentLoaded', async () => {
 	if (window.location.hash.includes('access_token')) {
@@ -158,21 +176,5 @@ loginBtn &&
 		}
 	});
 
-// -------- Log In with google ---------
-const LoginWithGoogle = document.getElementById("login-google");
-LoginWithGoogle && LoginWithGoogle.addEventListener('click', async () => {
-	try {
-		const { error } = await client.auth.signInWithOAuth({
-			provider: 'google',
-			options: {
-				redirectTo: window.location.origin + '/home.html',
-				queryParams: { access_type: 'offline', prompt: 'consent' },
-			},
-		})
-		if (error) throw error;
-	} catch (error) {
-		console.error('Google login error:', error);
-		alert(error.message || 'Google login failed');
-	}
-});
+
 
