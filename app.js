@@ -1,5 +1,3 @@
-// hi
-
 const supabaseUrl = "https://wyyxmzpqfhrjhkzgsmsh.supabase.co";
 const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind5eXhtenBxZmhyamhremdzbXNoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE0Mzg0ODYsImV4cCI6MjA2NzAxNDQ4Nn0.M4SK79mPcsv_Y5RXxhZZksacI50sZ9Zw1NPeimNvitU"
 
@@ -76,24 +74,24 @@ document.addEventListener('DOMContentLoaded', async () => {
 // -------- Log out --------
 const logoutBtn = document.getElementById('logoutBtn');
 logoutBtn &&
-logoutBtn.addEventListener('click', async () => {
-	try {
-		const { error } = await client.auth.signOut();
-		if (error) throw error;
-		window.location.href = 'index.html';
-	}catch (error) {
-		console.error("Error", error);
-		alert("Failed logout");
-	}
-})
+	logoutBtn.addEventListener('click', async () => {
+		try {
+			const { error } = await client.auth.signOut();
+			if (error) throw error;
+			window.location.href = 'index.html';
+		} catch (error) {
+			console.error("Error", error);
+			alert("Failed logout");
+		}
+	})
 
 // ------- Toggle eye button ---------
 const togglePassword = document.getElementById("togglePassword");
 const passwordInput = document.getElementById("signup-password") ||
-  document.getElementById("login-password");;
+	document.getElementById("login-password");;
 const eyeIcon = document.getElementById("eyeIcon");
 
-togglePassword.addEventListener('click', () =>  {
+togglePassword.addEventListener('click', () => {
 	const type = passwordInput.type === "password" ? "text" : "password";
 	passwordInput.type = type;
 
@@ -127,19 +125,38 @@ signupBtn &&
 				if (error) {
 					throw error; // ❗ Alert tabhi chalega agar real error ho
 				} else if (data?.user) {
-					window.location.href = 'login.html';
+					Swal.fire({
+						title: "Sign up successful!",
+						text: "Now login with your new account 🎉",
+						icon: "success",
+						confirmButtonText: "OK"
+					}).then(() => {
+						window.location.href = 'login.html';
+					});
 				}
 			} catch (error) {
 				console.error('Signup error:', error);
 				if (email.value === "" || password.value === "") {
-					alert("please fill all fields")
-				}else {
-					alert("You are already registered");
+					Swal.fire({
+						icon: 'warning',
+						title: 'Missing Fields',
+						text: 'Please fill all fields',
+					});
+				} else {
+					Swal.fire({
+						icon: 'warning',
+						title: 'Invalid Email',
+						text: 'Your account has been already register',
+					});
 				}
 				// alert(error.message || 'Signup failed');
 			}
 		} else {
-			alert('Please fill all fields');
+			Swal.fire({
+				icon: 'warning',
+				title: 'Missing Fields',
+				text: 'Please fill all fields',
+			});
 		}
 	});
 
@@ -163,14 +180,42 @@ loginBtn &&
 				if (error) {
 					throw error; // ❗ Alert tabhi chalega agar real error ho
 				} else if (data?.user) {
-					window.location.href = 'home.html';
+					const Toast = Swal.mixin({
+						toast: true,
+						position: 'top-end',
+						showConfirmButton: false,
+						timer: 3000,
+						timerProgressBar: true,
+						didOpen: (toast) => {
+							toast.onmouseenter = Swal.stopTimer;
+							toast.onmouseleave = Swal.resumeTimer;
+						}
+					});
+
+					Toast.fire({
+						icon: 'success',
+						title: 'Login successful!'
+					});
+
+					// Delay before redirect
+					setTimeout(() => {
+						window.location.href = 'home.html';
+					}, 1500);
 				}
 			} catch (error) {
 				console.error('Login error:', error);
 				if (email.value === "" || password.value === "") {
-					alert("please fill all fields")
-				}else {
-					alert("Please enter a valid email OR password");
+					Swal.fire({
+						icon: 'warning',
+						title: 'Missing Fields',
+						text: 'Please fill all fields',
+					});
+				} else {
+					Swal.fire({
+						icon: 'warning',
+						title: 'Invalid Email',
+						text: 'Your account has been already register',
+					});
 				}
 				// alert(error.message || 'Signup failed');
 			}
