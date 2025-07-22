@@ -10,8 +10,8 @@ console.log(client);
 async function userProfile() {
 	try {
 		const { data: { user }, error, } = await client.auth.getUser();
-		console.log("USER:", user);
-		console.log("ERROR:", error);
+		// console.log("USER:", user);
+		// console.log("ERROR:", error);
 		if (error) throw error;
 
 		if (user) {
@@ -214,7 +214,7 @@ loginBtn &&
 					Swal.fire({
 						icon: 'warning',
 						title: 'Invalid Email',
-						text: 'Your account has been already register',
+						text: 'Enter a valid password or email',
 					});
 				}
 				// alert(error.message || 'Signup failed');
@@ -224,33 +224,3 @@ loginBtn &&
 		}
 	});
 
-
-
-//--------------- ADD A POST ------------>
-const submitBtn = document.getElementById("post-btn");
-const loader = document.getElementById("loader-overlay");
-
-function showLoader() {
-    loader.style.display = 'flex';
-}
-
-function hideLoader() {
-    loader.style.display = 'none';
-};
-submitBtn &&
-    submitBtn.addEventListener('click', async () => {
-        const postTitle = document.getElementById('title').value.trim();
-        const postDes = document.getElementById('description').value.trim();
-
-        if (!postTitle || !postDes) {
-            Swal.fire({
-				icon: 'warning',
-				title: 'Missing Fields',
-				text: 'Please enter both a title and a description.',
-				confirmButtonColor: '#125b9a',
-			});
-			return;
-      }
-      showLoader();
-		submitPost.disabled = true;
-    })
