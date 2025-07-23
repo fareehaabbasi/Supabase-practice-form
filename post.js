@@ -86,10 +86,13 @@ if (window.location.pathname == "/all-thoughts.html") {
                 .from('post')
                 .select();
             if (data) {
-                const box = document.getElementsByClassName('container');
-                data.map((id, title, description) => {
+                const box = document.getElementById("container");
+                console.log(box)
+                box.innerHTML = data.map(({id, title, description}) => {
+                    // {console.log(title, description)}
                     // console.log(thoughts)
-                    `<div class="row g-4" id="thoughts-list">
+                    return (
+                        `<div id=${id} class="container row d-flex gap-4 m-5 py-5" id="thoughts-list">
                         <div class="col-md-4">
                             <div class="bg-black p-4 rounded h-100">
                                 <h5 class="text-warning">${title}</h5>
@@ -99,7 +102,8 @@ if (window.location.pathname == "/all-thoughts.html") {
                             </div>
                         </div>
                     </div>`
-                })
+                    )
+            })
                 console.log(data)
             } else {
                 console.log(error)
