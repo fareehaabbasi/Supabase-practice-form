@@ -78,7 +78,7 @@ submitBtn &&
     })
 
 
-// YOUR THOUGHTS
+// All THOUGHTS
 if (window.location.pathname == "/all-thoughts.html") {
     try {
         const readAllThoughts = async () => {
@@ -88,22 +88,17 @@ if (window.location.pathname == "/all-thoughts.html") {
             if (data) {
                 const box = document.getElementById("container");
                 console.log(box)
-                box.innerHTML = data.map(({id, title, description}) => {
-                    // {console.log(title, description)}
-                    // console.log(thoughts)
-                    return (
-                        `<div id=${id} class="container row d-flex gap-4 m-5 py-5" id="thoughts-list">
-                        <div class="col-md-4">
-                            <div class="bg-black p-4 rounded h-100">
-                                <h5 class="text-warning">${title}</h5>
-                                <p>${description}</p>
-                                <button class="btn btn-warning btn-sm me-2">Add</button>
-                                <button class="btn btn-danger btn-sm">Delete</button>
-                            </div>
-                        </div>
-                    </div>`
-                    )
-            })
+                box.innerHTML = data.map(({ id, title, description }) => {
+                    return `
+              <div id=${id} class="col-lg-4 col-md-6 col-sm-12">
+                <div class="bg-black p-4 rounded h-100 shadow">
+                  <h5 class="text-warning">${title}</h5>
+                  <p>${description}</p>
+                  <button class="btn btn-warning btn-sm me-2">Edit</button>
+                  <button class="btn btn-danger btn-sm">Delete</button>
+                </div>
+              </div>`;
+                }).join("");
                 console.log(data)
             } else {
                 console.log(error)
