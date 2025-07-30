@@ -25,6 +25,19 @@ body {
     color: #ddd;
 }
 
+.dropdown-menu {
+  background-color: #1c1c1c;
+}
+
+.dropdown-item:hover {
+  background-color: #333;
+  color: #FFA500;
+}
+
+.dropdown-toggle::after {
+  display: none !important;
+}
+
 .hero h1,
 .hero h2,
 .text-warning {
@@ -124,3 +137,8 @@ textarea:focus {
 		background-position: 0% 50%, 50% 50%, 100% 100%;
 	}
 }
+
+.swal2-input {
+  margin: 0.5rem 0;
+  margin-left: 1rem;
+} 
